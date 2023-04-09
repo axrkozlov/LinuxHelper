@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class TipsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is tips Fragment"
+        value = "Это окно полезной информации"
     }
     val text: LiveData<String> = _text
 }
