@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ldv.linuxhelper.databinding.ItemTopicBinding
+import com.ldv.linuxhelper.db.Topic
 
 /**
  * Adapter for the task list. Has a reference to the [TasksViewModel] to send actions back to it.
@@ -47,16 +48,19 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
 
             binding.title.text=topic.title
             binding.subtitle.text=topic.subtitle
+            binding.root.setOnClickListener {
+                viewModel.openTopic(topic)
+            }
 
             binding.bookmark.setOnClickListener {
-                topic.isBookmarked=true
+                topic.isFavourite=true
                 viewModel.updateTopic(topic)
             }
             binding.share.setOnClickListener {
                 viewModel.shareTopic(topic)
             }
             binding.like.setOnClickListener {
-                topic.isLiked= true
+                topic.likeCount++
                 viewModel.updateTopic(topic)
             }
 //            binding.viewmodel = viewModel
@@ -83,7 +87,7 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
  */
 class TaskDiffCallback : DiffUtil.ItemCallback<Topic>() {
     override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.number == newItem.number
     }
 
     override fun areContentsTheSame(oldItem: Topic, newItem: Topic): Boolean {
