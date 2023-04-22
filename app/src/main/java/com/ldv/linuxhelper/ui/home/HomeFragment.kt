@@ -52,8 +52,8 @@ class HomeFragment : Fragment() {
     }
 
     val list = listOf (
-        Topic("asdf","asdf",null),
-        Topic("zxcvc","zcv",null)
+        Topic(1,"Что такое Linux?","История создания",null),
+        Topic(2,"Дистрибутивы Linux","Из чего состоят дистрибутивы Linux",null)
 
     )
 

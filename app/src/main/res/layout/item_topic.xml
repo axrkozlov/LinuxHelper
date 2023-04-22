@@ -1,26 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:backgroundTint="@color/design_default_color_background"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        tools:text="42" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/subtitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        tools:text="fact about 42"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        <FrameLayout
+            android:id="@+id/topicNumberFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/topicNumber"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|center_horizontal"
+                android:background="@color/purple_200"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/white"
+                tools:text="42" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TopicName" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="fact about 42" />
+        <ImageButton
+            android:id="@+id/bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:foregroundGravity="center"
+            android:padding="8dp"
+            android:src="@drawable/bookmark_off"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            tools:layout_editor_absoluteX="110dp" />
+        <ImageButton
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:foregroundGravity="center"
+            android:padding="8dp"
+            android:src="@drawable/share"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            app:layout_constraintStart_toEndOf="@id/bookmark"
+            tools:layout_editor_absoluteX="110dp" />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:foregroundGravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_favorite_24dp"
+            app:layout_constraintStart_toEndOf="@id/share"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

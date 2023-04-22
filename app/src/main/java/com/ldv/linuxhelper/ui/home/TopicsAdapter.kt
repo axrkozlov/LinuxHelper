@@ -43,9 +43,22 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: HomeViewModel, topic: Topic) {
-binding.title.text=topic.title
+            binding.topicNumber.text=topic.number.toString()
+
+            binding.title.text=topic.title
             binding.subtitle.text=topic.subtitle
 
+            binding.bookmark.setOnClickListener {
+                topic.isBookmarked=true
+                viewModel.updateTopic(topic)
+            }
+            binding.share.setOnClickListener {
+                viewModel.shareTopic(topic)
+            }
+            binding.like.setOnClickListener {
+                topic.isLiked= true
+                viewModel.updateTopic(topic)
+            }
 //            binding.viewmodel = viewModel
 //            binding.task = item
 //            binding.executePendingBindings()
