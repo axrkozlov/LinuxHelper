@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.ldv.linuxhelper.databinding.FragmentDashboardBinding
+import com.ldv.linuxhelper.databinding.FragmentTipsBinding
 
 class TipsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentTipsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,10 +25,10 @@ class TipsFragment : Fragment() {
         val tipsViewModel =
             ViewModelProvider(this).get(TipsViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentTipsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.textTips
         tipsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

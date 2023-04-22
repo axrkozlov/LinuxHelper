@@ -15,11 +15,11 @@
         android:id="@+id/navigation_favourites"
         android:name="com.ldv.linuxhelper.ui.tips.TipsFragment"
         android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_tips" />
 
     <fragment
         android:id="@+id/navigation_tips"
-        android:name="com.ldv.linuxhelper.ui.favourites.FavouritesFragment"
+        android:name="com.ldv.linuxhelper.ui.tips.TipsFragment"
         android:label="@string/title_tips"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_tips" />
 </navigation>

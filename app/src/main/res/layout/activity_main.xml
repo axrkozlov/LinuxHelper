@@ -6,28 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:background="?android:attr/windowBackground">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:title="@string/app_name"
-                app:menu="@menu/top_app_bar"
-                android:background="?android:attr/windowBackground"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"

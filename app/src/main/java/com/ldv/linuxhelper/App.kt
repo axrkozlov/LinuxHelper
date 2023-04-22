@@ -5,7 +5,7 @@ import com.google.android.material.color.DynamicColors
 
 
 
-class Material3 : Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
