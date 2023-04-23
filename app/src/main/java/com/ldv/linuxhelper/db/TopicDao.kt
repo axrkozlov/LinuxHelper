@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TopicDao {
 
-    @Query("SELECT * FROM topics_table ORDER BY number DESC")
+    @Query("SELECT * FROM topics_table ORDER BY number ASC")
     fun getTopics(): Flow<List<Topic>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

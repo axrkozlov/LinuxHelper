@@ -17,10 +17,12 @@ package com.ldv.linuxhelper.ui.home
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.ItemTopicBinding
 import com.ldv.linuxhelper.db.Topic
 
@@ -52,20 +54,24 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
                 viewModel.openTopic(topic)
             }
 
+            val isBookmarkedResource = if (topic.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
+            binding.bookmark.setImageResource(isBookmarkedResource)
+
             binding.bookmark.setOnClickListener {
-                topic.isFavourite=true
+                topic.isBookmarked=!topic.isBookmarked
                 viewModel.updateTopic(topic)
             }
             binding.share.setOnClickListener {
                 viewModel.shareTopic(topic)
             }
+
+            val likeCountVisibility = if (topic.likeCount>0)View.VISIBLE else View.GONE
+            binding.likeCount.visibility = likeCountVisibility
+            binding.likeCount.text =topic.likeCount.toString()
             binding.like.setOnClickListener {
                 topic.likeCount++
                 viewModel.updateTopic(topic)
             }
-//            binding.viewmodel = viewModel
-//            binding.task = item
-//            binding.executePendingBindings()
         }
 
         companion object {

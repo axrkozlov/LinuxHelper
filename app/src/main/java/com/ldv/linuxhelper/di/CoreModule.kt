@@ -9,11 +9,7 @@ import org.koin.dsl.module
 
 val coreModule = module {
 
-    single {
-        ProvideCoreInstances(androidContext())
-    }
-
-    single { get<ProvideCoreInstances>().provideDbModule() }
+    single { DbModule(androidContext()) }
     single { get<DbModule>().provideDatabase().topicDao() }
 //    single { DbModule.Base(androidContext()).provideDatabase().topicDao() }
 
