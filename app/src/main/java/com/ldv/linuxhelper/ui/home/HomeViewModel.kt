@@ -41,13 +41,15 @@ class HomeViewModel(val topicDao: TopicDao) : ViewModel() {
 
     fun shareTopic(topic: Topic) {
         viewModelScope.launch {
-            command.emit(OpenTopic(topic))
+            command.emit(ShareTopic(topic))
         }
 
     }
 
     fun openTopic(topic: Topic) {
-        TODO("Not yet implemented")
+        viewModelScope.launch {
+            command.emit(OpenTopic(topic))
+        }
     }
 
     private val _text = MutableLiveData<String>().apply {
@@ -57,5 +59,7 @@ class HomeViewModel(val topicDao: TopicDao) : ViewModel() {
 
     sealed class TopicCommand
     class OpenTopic(val topic: Topic) : TopicCommand()
+    class ShareTopic(val topic: Topic) : TopicCommand()
+
 
 }

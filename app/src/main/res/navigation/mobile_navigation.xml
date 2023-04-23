@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.ldv.linuxhelper.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_text"
+            app:destination="@id/navigation_text" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favourites"
@@ -22,4 +26,12 @@
         android:name="com.ldv.linuxhelper.ui.tips.TipsFragment"
         android:label="@string/title_tips"
         tools:layout="@layout/fragment_tips" />
+
+    <fragment
+        android:id="@+id/navigation_text"
+        android:name="com.ldv.linuxhelper.ui.text.TextFragment"
+        android:label="@string/title_text"
+        tools:layout="@layout/fragment_text" />
+
+
 </navigation>

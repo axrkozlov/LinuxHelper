@@ -4,10 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.fragment.findNavController
+import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.FragmentHomeBinding
 import com.ldv.linuxhelper.db.Topic
 import kotlinx.coroutines.launch
@@ -26,9 +30,12 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListAdapter()
@@ -50,12 +57,17 @@ class HomeFragment : Fragment() {
         lifecycle.coroutineScope.launch {
             viewModel.command.collect {
                 when (it){
-                    is HomeViewModel.OpenTopic -> shareTopic(it.topic)
+                    is HomeViewModel.OpenTopic -> openTopic(it.topic)
+                    is HomeViewModel.ShareTopic -> shareTopic(it.topic)
                 }
             }
         }
 
 
+    }
+
+    private fun openTopic(topic: Topic) {
+        findNavController().navigate(R.id.navigation_text)
     }
 
     fun shareTopic(topic: Topic){
@@ -77,4 +89,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
