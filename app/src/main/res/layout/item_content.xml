@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:backgroundTint="@color/design_default_color_background"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/topicNumberFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TopicName" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="8dp"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="fact about 42" />
+
+        <TextView
+            android:id="@+id/example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textStyle="italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            tools:text="fact about 42" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/bookmark"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="?android:selectableItemBackground"-->
+<!--            android:foregroundGravity="center"-->
+<!--            android:padding="8dp"-->
+<!--            android:src="@drawable/bookmark_off"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/subtitle"-->
+<!--            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"-->
+<!--            tools:layout_editor_absoluteX="110dp" />-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/share"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="?android:selectableItemBackground"-->
+<!--            android:foregroundGravity="center"-->
+<!--            android:padding="8dp"-->
+<!--            android:src="@drawable/share"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/subtitle"-->
+<!--            app:layout_constraintStart_toEndOf="@id/bookmark"-->
+<!--            tools:layout_editor_absoluteX="110dp" />-->
+<!--<LinearLayout-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--android:orientation="horizontal"-->
+<!--    app:layout_constraintStart_toEndOf="@id/share"-->
+<!--    app:layout_constraintTop_toBottomOf="@id/subtitle">-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/like"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="?android:selectableItemBackground"-->
+<!--            android:foregroundGravity="center"-->
+<!--            android:paddingStart="8dp"-->
+<!--            android:paddingEnd="1dp"-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:src="@drawable/ic_baseline_favorite_24dp" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/likeCount"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingStart="1dp"-->
+<!--        android:paddingEnd="8dp"-->
+<!--        android:paddingTop="8dp"-->
+<!--        android:paddingBottom="8dp"-->
+<!--        android:visibility="gone"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintStart_toEndOf="@id/topicNumberFrame"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:text="1" />-->
+<!--</LinearLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>

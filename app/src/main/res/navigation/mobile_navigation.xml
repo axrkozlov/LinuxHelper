@@ -11,8 +11,8 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_text"
-            app:destination="@id/navigation_text" />
+            android:id="@+id/action_navigation_home_to_navigation_content"
+            app:destination="@id/navigation_content" />
     </fragment>
 
     <fragment
@@ -33,5 +33,13 @@
         android:label="@string/title_text"
         tools:layout="@layout/fragment_text" />
 
-
+    <fragment
+        android:id="@+id/navigation_content"
+        android:name="com.ldv.linuxhelper.ui.content.ContentFragment"
+        android:label="Content"
+        tools:layout="@layout/fragment_content" >
+        <argument
+            android:name="number"
+            app:argType="long" />
+    </fragment>
 </navigation>

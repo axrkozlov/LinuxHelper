@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.FragmentHomeBinding
 import com.ldv.linuxhelper.db.Topic
+import com.ldv.linuxhelper.ui.content.ContentAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +25,17 @@ class HomeFragment : Fragment() {
 
     private lateinit var listAdapter: TopicsAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        lifecycle.coroutineScope.launch {
+            viewModel.command.collect {
+                when (it){
+                    is HomeViewModel.OpenTopic -> openTopic(it.topic)
+                    is HomeViewModel.ShareTopic -> shareTopic(it.topic)
+                }
+            }
+        }
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,20 +66,18 @@ class HomeFragment : Fragment() {
 //                if (it[0].topicParts.size>0) Log.i("TAG", "setupListAdapter: ${it[0].topicParts[0].command}")
             }
         }
-        lifecycle.coroutineScope.launch {
-            viewModel.command.collect {
-                when (it){
-                    is HomeViewModel.OpenTopic -> openTopic(it.topic)
-                    is HomeViewModel.ShareTopic -> shareTopic(it.topic)
-                }
-            }
-        }
+
 
 
     }
 
     private fun openTopic(topic: Topic) {
-        findNavController().navigate(R.id.navigation_text)
+        Log.i("TAG", "openTopic: $topic")
+//        val bundle = bundleOf("number" to topic.number)
+//        findNavController().navigate(R.id.navigation_content,bundle)
+        val direction =
+            HomeFragmentDirections.actionNavigationHomeToNavigationContent(topic.number)
+        findNavController().navigate(direction)
     }
 
     fun shareTopic(topic: Topic){

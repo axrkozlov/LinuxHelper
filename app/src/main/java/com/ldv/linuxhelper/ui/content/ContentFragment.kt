@@ -1,4 +1,4 @@
-package com.ldv.linuxhelper.ui.tips
+package com.ldv.linuxhelper.ui.content
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,47 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ldv.linuxhelper.R
+import com.ldv.linuxhelper.databinding.FragmentContentBinding
 import com.ldv.linuxhelper.databinding.FragmentTipsBinding
 import com.ldv.linuxhelper.db.Tip
-import com.ldv.linuxhelper.ui.home.HomeViewModel
+import com.ldv.linuxhelper.ui.tips.TipsAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TipsFragment : Fragment() {
+class ContentFragment : Fragment() {
 
-    private var _binding: FragmentTipsBinding? = null
+    private var _binding: FragmentContentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: TipsViewModel by viewModel()
+    private val viewModel: ContentViewModel by viewModel()
+    val args: ContentFragmentArgs by navArgs()
 
-    private lateinit var listAdapter: TipsAdapter
+    private lateinit var listAdapter: ContentAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        lifecycle.coroutineScope.launch {
-            viewModel.command.collect {
-                when (it){
-                    is TipsViewModel.OpenTip -> openTip(it.tip)
-                    is TipsViewModel.ShareTip -> shareTip(it.tip)
-                }
-            }
-        }
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTipsBinding.inflate(inflater, container, false)
-
+        _binding = FragmentContentBinding.inflate(inflater, container, false)
+        savedInstanceState?.getLong("number")
         return binding.root
     }
 
@@ -61,14 +52,13 @@ class TipsFragment : Fragment() {
 
     private fun setupListAdapter() {
 
-        listAdapter = TipsAdapter(viewModel)
+        listAdapter = ContentAdapter(viewModel)
         binding.tipList.adapter = listAdapter
-
         lifecycle.coroutineScope.launch {
-            viewModel.getList().collect {
-                checkList(it)
-                listAdapter.submitList(it)
-                Log.i("TAG", "setupListAdapter: ${it.size}")
+            viewModel.getTopic(args.number).collect {
+                binding.toolbar.title = it.title
+                listAdapter.submitList(it.topicParts)
+                Log.i("TAG", "setupListAdapter: ${it.topicParts}")
             }
         }
 
@@ -91,9 +81,6 @@ class TipsFragment : Fragment() {
         startActivity(shareIntent)
     }
 
-    private fun checkList(list: List<Tip>) {
-        if (list.isEmpty()) viewModel.seedTip()
-    }
 
 
     override fun onDestroyView() {

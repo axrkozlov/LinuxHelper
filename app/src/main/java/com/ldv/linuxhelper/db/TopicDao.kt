@@ -19,4 +19,7 @@ interface TopicDao {
     @Update
     fun update(topic: Topic)
 
+    @Query("SELECT * FROM topics_table WHERE number =:number")
+    fun getTopic(number: Long) : Flow<Topic>
+
 }
