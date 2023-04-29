@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
@@ -28,7 +30,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         lifecycle.coroutineScope.launch {
             viewModel.command.collect {
-                when (it){
+                when (it) {
                     is HomeViewModel.OpenTopic -> openTopic(it.topic)
                     is HomeViewModel.ShareTopic -> shareTopic(it.topic)
                 }
@@ -36,6 +38,7 @@ class HomeFragment : Fragment() {
         }
         super.onCreate(savedInstanceState)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,9 +50,9 @@ class HomeFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListAdapter()
+        setupToolbar()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -68,7 +71,24 @@ class HomeFragment : Fragment() {
         }
 
 
+    }
 
+    fun setupToolbar() {
+        binding.toolbar.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.search_button-> navigateSearch()
+                R.id.settings_button->showSettings()
+            }
+            true
+        }
+    }
+
+    private fun showSettings() {
+
+    }
+
+    private fun navigateSearch() {
+        findNavController().navigate(R.id.navigation_search)
     }
 
     private fun openTopic(topic: Topic) {
@@ -80,7 +100,7 @@ class HomeFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
-    fun shareTopic(topic: Topic){
+    fun shareTopic(topic: Topic) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, topic.toString())

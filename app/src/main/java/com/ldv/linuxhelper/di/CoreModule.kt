@@ -4,8 +4,10 @@ package com.ldv.linuxhelper.di
 import com.ldv.linuxhelper.db.DbModule
 import com.ldv.linuxhelper.db.TopicDatabase
 import com.ldv.linuxhelper.ui.home.HomeViewModel
-import com.ldv.linuxhelper.ui.text.TextViewModel
+import com.ldv.linuxhelper.ui.text.WebInfoViewModel
 import com.ldv.linuxhelper.ui.content.ContentViewModel
+import com.ldv.linuxhelper.ui.search.SearchViewModel
+import com.ldv.linuxhelper.ui.text.TextViewModel
 import com.ldv.linuxhelper.ui.tips.TipsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,6 +27,9 @@ val coreModule = module {
     viewModel { TextViewModel(get()) }
     viewModel { TipsViewModel(get()) }
     viewModel { ContentViewModel(get()) }
+    viewModel { WebInfoViewModel() }
+    viewModel { SearchViewModel(get()) }
+
 
 //    single<DispatchersList> { DispatchersList.Base() }
 //    single<ManageResources> { ManageResources.Base(androidContext()) }

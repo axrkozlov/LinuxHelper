@@ -13,55 +13,80 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ldv.linuxhelper.ui.tips
+package com.ldv.linuxhelper.ui.search
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ldv.linuxhelper.R
-import com.ldv.linuxhelper.databinding.ItemTipBinding
-import com.ldv.linuxhelper.db.Tip
+import com.ldv.linuxhelper.databinding.ItemContentBinding
+import com.ldv.linuxhelper.db.Content
 
 /**
  * Adapter for the task list. Has a reference to the [TasksViewModel] to send actions back to it.
  */
-class TipsAdapter(private val viewModel: TipsViewModel) :
-    ListAdapter<Tip, TipsAdapter.TipViewHolder>(TaskDiffCallback()) {
+class SearchAdapter(private val viewModel:SearchViewModel) :
+    ListAdapter<Content, SearchAdapter.ContentViewHolder>(TaskDiffCallback()) {
 
-    override fun onBindViewHolder(holder: TipViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
         val item = getItem(position)
 
         holder.bind(viewModel, item)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TipViewHolder {
-        return TipViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
+        return ContentViewHolder.from(parent)
     }
 
-    class TipViewHolder private constructor(val binding: ItemTipBinding) :
+    class ContentViewHolder private constructor(val binding: ItemContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: TipsViewModel, tip: Tip) {
-//            binding.topicNumber.text=tip.number.toString()
+        fun bind(viewModel: SearchViewModel, content: Content) {
+            binding.title.text=content.topicPart.command
+            binding.description.text=content.topicPart.description
+            binding.example.text=content.topicPart.example
 
-            binding.title.text=tip.title
-            binding.subtitle.text=tip.subtitle
-            binding.root.setOnClickListener {
-                viewModel.openTopic(tip)
+//            binding.title.text=topic.title
+//            binding.subtitle.text=topic.subtitle
+//            var hashtag =StringBuilder()
+//            topic.topicParts.forEach {
+//                hashtag.append("#${it.command} ")
+//            }
+//            binding.subtitle.text=hashtag.toString()
+//
+//            binding.root.setOnClickListener {
+//                viewModel.openTopic(topic)
+//            }
+//
+            val isBookmarkedResource = if (content.topicPart.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
+            binding.bookmark.setImageResource(isBookmarkedResource)
+//
+            binding.bookmark.setOnClickListener {
+                content.topicPart.isBookmarked=!content.topicPart.isBookmarked
+                viewModel.updateTopic(content.topic)
             }
-
+            binding.share.setOnClickListener {
+                viewModel.shareTopic(content.topicPart.toString())
+            }
+//
+//            val likeCountVisibility = if (topic.likeCount>0)View.VISIBLE else View.GONE
+//            binding.likeCount.visibility = likeCountVisibility
+//            binding.likeCount.text =topic.likeCount.toString()
+//            binding.like.setOnClickListener {
+//                topic.likeCount++
+//                viewModel.updateTopic(topic)
+//            }
         }
 
         companion object {
-            fun from(parent: ViewGroup): TipViewHolder {
+            fun from(parent: ViewGroup): ContentViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemTipBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemContentBinding.inflate(layoutInflater, parent, false)
 
-                return TipViewHolder(binding)
+                return ContentViewHolder(binding)
             }
         }
     }
@@ -73,12 +98,12 @@ class TipsAdapter(private val viewModel: TipsViewModel) :
  * Used by ListAdapter to calculate the minimum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-class TaskDiffCallback : DiffUtil.ItemCallback<Tip>() {
-    override fun areItemsTheSame(oldItem: Tip, newItem: Tip): Boolean {
-        return oldItem.number == newItem.number
+class TaskDiffCallback : DiffUtil.ItemCallback<Content>() {
+    override fun areItemsTheSame(oldItem: Content, newItem: Content): Boolean {
+        return oldItem.topicPart == newItem.topicPart
     }
 
-    override fun areContentsTheSame(oldItem: Tip, newItem: Tip): Boolean {
+    override fun areContentsTheSame(oldItem: Content, newItem: Content): Boolean {
         return oldItem == newItem
     }
 }

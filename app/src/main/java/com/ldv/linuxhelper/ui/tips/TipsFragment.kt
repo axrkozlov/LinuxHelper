@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.FragmentTipsBinding
 import com.ldv.linuxhelper.db.Tip
+import com.ldv.linuxhelper.db.Topic
+import com.ldv.linuxhelper.ui.home.HomeFragmentDirections
 import com.ldv.linuxhelper.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,13 +79,15 @@ class TipsFragment : Fragment() {
     }
 
     private fun openTip(tip: Tip) {
-        findNavController().navigate(R.id.navigation_text)
+        val direction = TipsFragmentDirections.actionNavigationTipsToNavigationWebInfo(tip.content)
+        findNavController().navigate(direction)
     }
+
 
     fun shareTip(tip: Tip){
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, tip.title)
+            putExtra(Intent.EXTRA_TEXT, tip.content)
             type = "text/plain"
         }
 

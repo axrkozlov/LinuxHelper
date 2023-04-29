@@ -27,11 +27,12 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintEnd_toEndOf="@id/share"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="TopicName" />
 

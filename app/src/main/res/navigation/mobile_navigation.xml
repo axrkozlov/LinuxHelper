@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_content"
             app:destination="@id/navigation_content" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_text"
+            app:destination="@id/navigation_text" />
     </fragment>
 
     <fragment
@@ -25,13 +28,23 @@
         android:id="@+id/navigation_tips"
         android:name="com.ldv.linuxhelper.ui.tips.TipsFragment"
         android:label="@string/title_tips"
-        tools:layout="@layout/fragment_tips" />
+        tools:layout="@layout/fragment_tips" >
+        <action
+            android:id="@+id/action_navigation_tips_to_navigation_web_info"
+            app:destination="@id/navigation_web_info" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_text"
         android:name="com.ldv.linuxhelper.ui.text.TextFragment"
         android:label="@string/title_text"
         tools:layout="@layout/fragment_text" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.ldv.linuxhelper.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_content"
@@ -42,4 +55,15 @@
             android:name="number"
             app:argType="long" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_web_info"
+        android:name="com.ldv.linuxhelper.ui.webinfo.WebInfoFragment"
+        android:label="WebInfo"
+        tools:layout="@layout/fragment_webinfo" >
+        <argument
+            android:name="page"
+            app:argType="string" />
+    </fragment>
+
 </navigation>
