@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
     fun shareTopic(topic: Topic){
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, topic.title)
+            putExtra(Intent.EXTRA_TEXT, topic.toString())
             type = "text/plain"
         }
 

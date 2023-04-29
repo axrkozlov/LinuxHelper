@@ -3,6 +3,7 @@ package com.ldv.linuxhelper.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.lang.StringBuilder
 
 @Entity(tableName = "topics_table")
 class Topic(
@@ -24,6 +25,17 @@ class Topic(
         return super.hashCode()
     }
 
+    override fun toString(): String {
+        val string = StringBuilder()
+        string.append(title)
+        string.append("\n")
+        topicParts.forEach {
+            string.append(it.toString())
+            string.append("\n")
+        }
+
+        return string.toString()
+    }
 }
 
 class TopicPart(

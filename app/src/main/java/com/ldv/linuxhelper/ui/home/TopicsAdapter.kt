@@ -60,13 +60,13 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
                 viewModel.openTopic(topic)
             }
 
-            val isBookmarkedResource = if (topic.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
-            binding.bookmark.setImageResource(isBookmarkedResource)
-
-            binding.bookmark.setOnClickListener {
-                topic.isBookmarked=!topic.isBookmarked
-                viewModel.updateTopic(topic)
-            }
+//            val isBookmarkedResource = if (topic.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
+//            binding.bookmark.setImageResource(isBookmarkedResource)
+//
+//            binding.bookmark.setOnClickListener {
+//                topic.isBookmarked=!topic.isBookmarked
+//                viewModel.updateTopic(topic)
+//            }
             binding.share.setOnClickListener {
                 viewModel.shareTopic(topic)
             }

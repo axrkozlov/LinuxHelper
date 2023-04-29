@@ -36,9 +36,12 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:singleLine="false"
+            android:maxLines="4"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,26 +49,26 @@
 
         <TextView
             android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:padding="8dp"
+            android:singleLine="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="fact about 42" />
-        <ImageButton
-            android:id="@+id/bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:foregroundGravity="center"
-            android:padding="8dp"
-            android:src="@drawable/bookmark_off"
-            app:layout_constraintTop_toBottomOf="@id/subtitle"
-            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
-            tools:layout_editor_absoluteX="110dp" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/bookmark"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="?android:selectableItemBackground"-->
+<!--            android:foregroundGravity="center"-->
+<!--            android:padding="8dp"-->
+<!--            android:src="@drawable/bookmark_off"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/subtitle"-->
+<!--            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"-->
+<!--            tools:layout_editor_absoluteX="110dp" />-->
         <ImageButton
             android:id="@+id/share"
             android:layout_width="wrap_content"
@@ -75,7 +78,7 @@
             android:padding="8dp"
             android:src="@drawable/share"
             app:layout_constraintTop_toBottomOf="@id/subtitle"
-            app:layout_constraintStart_toEndOf="@id/bookmark"
+            app:layout_constraintStart_toEndOf="@id/topicNumberFrame"
             tools:layout_editor_absoluteX="110dp" />
 <LinearLayout
     android:layout_width="wrap_content"
