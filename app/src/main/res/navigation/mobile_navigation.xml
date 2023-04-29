@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.ldv.linuxhelper.ui.tips.TipsFragment"
+        android:name="com.ldv.linuxhelper.ui.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_tips" />
+        tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_tips"
