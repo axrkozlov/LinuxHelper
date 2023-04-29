@@ -29,9 +29,9 @@ class ContentViewModel(val topicDao: TopicDao) : ViewModel() {
         }
     }
 
-    fun shareTopic(topic: Topic) {
+    fun shareTopic(string: String) {
         viewModelScope.launch {
-            command.emit(ShareTopic(topic))
+            command.emit(ShareTopic(string))
         }
 
     }
@@ -51,7 +51,7 @@ class ContentViewModel(val topicDao: TopicDao) : ViewModel() {
 
     sealed class TopicCommand
     class OpenTopic(val topic: Topic) : TopicCommand()
-    class ShareTopic(val topic: Topic) : TopicCommand()
+    class ShareTopic(val string: String) : TopicCommand()
 
 
 }

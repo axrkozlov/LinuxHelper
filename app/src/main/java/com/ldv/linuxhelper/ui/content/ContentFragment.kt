@@ -2,7 +2,6 @@ package com.ldv.linuxhelper.ui.content
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.FragmentContentBinding
-import com.ldv.linuxhelper.databinding.FragmentTipsBinding
+import com.ldv.linuxhelper.db.Content
 import com.ldv.linuxhelper.db.Tip
-import com.ldv.linuxhelper.ui.tips.TipsAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +28,17 @@ class ContentFragment : Fragment() {
     val args: ContentFragmentArgs by navArgs()
 
     private lateinit var listAdapter: ContentAdapter
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        lifecycle.coroutineScope.launch {
+            viewModel.command.collect {
+                when (it){
+                    is ContentViewModel.ShareTopic -> shareCommand(it.string)
+                    else ->{}
+                }
+            }
+        }
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,10 +63,12 @@ class ContentFragment : Fragment() {
         listAdapter = ContentAdapter(viewModel)
         binding.tipList.adapter = listAdapter
         lifecycle.coroutineScope.launch {
-            viewModel.getTopic(args.number).collect {
-                binding.toolbar.title = it.title
-                listAdapter.submitList(it.topicParts)
-                Log.i("TAG", "setupListAdapter: ${it.topicParts}")
+            viewModel.getTopic(args.number).collect { topic->
+                binding.toolbar.title = topic.title
+                val content = topic.topicParts.map {
+                    Content(it,topic)
+                }
+                listAdapter.submitList(content)
             }
         }
 
@@ -70,10 +80,10 @@ class ContentFragment : Fragment() {
         findNavController().navigate(R.id.navigation_text)
     }
 
-    fun shareTip(tip: Tip){
+    fun shareCommand(string: String){
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, tip.title)
+            putExtra(Intent.EXTRA_TEXT, string)
             type = "text/plain"
         }
 

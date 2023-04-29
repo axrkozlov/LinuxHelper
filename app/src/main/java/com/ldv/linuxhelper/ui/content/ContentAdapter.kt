@@ -17,21 +17,19 @@ package com.ldv.linuxhelper.ui.content
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ldv.linuxhelper.R
 import com.ldv.linuxhelper.databinding.ItemContentBinding
-import com.ldv.linuxhelper.db.TopicPart
-import com.ldv.linuxhelper.ui.home.HomeViewModel
+import com.ldv.linuxhelper.db.Content
 
 /**
  * Adapter for the task list. Has a reference to the [TasksViewModel] to send actions back to it.
  */
 class ContentAdapter(private val viewModel: ContentViewModel) :
-    ListAdapter<TopicPart, ContentAdapter.ContentViewHolder>(TaskDiffCallback()) {
+    ListAdapter<Content, ContentAdapter.ContentViewHolder>(TaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
         val item = getItem(position)
@@ -46,10 +44,10 @@ class ContentAdapter(private val viewModel: ContentViewModel) :
     class ContentViewHolder private constructor(val binding: ItemContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: ContentViewModel, topicPart: TopicPart) {
-            binding.title.text=topicPart.command
-            binding.description.text=topicPart.description
-            binding.example.text=topicPart.example
+        fun bind(viewModel: ContentViewModel, content: Content) {
+            binding.title.text=content.topicPart.command
+            binding.description.text=content.topicPart.description
+            binding.example.text=content.topicPart.example
 
 //            binding.title.text=topic.title
 //            binding.subtitle.text=topic.subtitle
@@ -63,16 +61,16 @@ class ContentAdapter(private val viewModel: ContentViewModel) :
 //                viewModel.openTopic(topic)
 //            }
 //
-//            val isBookmarkedResource = if (topic.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
-//            binding.bookmark.setImageResource(isBookmarkedResource)
+            val isBookmarkedResource = if (content.topicPart.isBookmarked) R.drawable.bookmark_on else R.drawable.bookmark_off
+            binding.bookmark.setImageResource(isBookmarkedResource)
 //
-//            binding.bookmark.setOnClickListener {
-//                topic.isBookmarked=!topic.isBookmarked
-//                viewModel.updateTopic(topic)
-//            }
-//            binding.share.setOnClickListener {
-//                viewModel.shareTopic(topic)
-//            }
+            binding.bookmark.setOnClickListener {
+                content.topicPart.isBookmarked=!content.topicPart.isBookmarked
+                viewModel.updateTopic(content.topic)
+            }
+            binding.share.setOnClickListener {
+                viewModel.shareTopic(content.topicPart.toString())
+            }
 //
 //            val likeCountVisibility = if (topic.likeCount>0)View.VISIBLE else View.GONE
 //            binding.likeCount.visibility = likeCountVisibility
@@ -100,12 +98,12 @@ class ContentAdapter(private val viewModel: ContentViewModel) :
  * Used by ListAdapter to calculate the minimum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-class TaskDiffCallback : DiffUtil.ItemCallback<TopicPart>() {
-    override fun areItemsTheSame(oldItem: TopicPart, newItem: TopicPart): Boolean {
-        return oldItem.command == newItem.command
+class TaskDiffCallback : DiffUtil.ItemCallback<Content>() {
+    override fun areItemsTheSame(oldItem: Content, newItem: Content): Boolean {
+        return oldItem.topicPart == newItem.topicPart
     }
 
-    override fun areContentsTheSame(oldItem: TopicPart, newItem: TopicPart): Boolean {
+    override fun areContentsTheSame(oldItem: Content, newItem: Content): Boolean {
         return oldItem == newItem
     }
 }

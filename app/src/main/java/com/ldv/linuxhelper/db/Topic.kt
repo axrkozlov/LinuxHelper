@@ -29,5 +29,8 @@ class Topic(
 class TopicPart(
     val command:String,
     val description: String,
-    val example:String
-)
+    val example:String,
+    var isBookmarked: Boolean = false
+){
+    override fun toString(): String = command + "\n" + description+ "\n" + example
+}
