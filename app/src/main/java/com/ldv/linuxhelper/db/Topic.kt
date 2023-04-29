@@ -12,6 +12,7 @@ class Topic(
     @ColumnInfo(name = "content") val content: String,
     @ColumnInfo(name = "isFavourite") var isBookmarked: Boolean,
     @ColumnInfo(name = "likeCount") var likeCount: Long,
+    @ColumnInfo(name = "topicParts") var topicParts: List<TopicPart>,
 
 
     ) {
@@ -22,4 +23,11 @@ class Topic(
     override fun hashCode(): Int {
         return super.hashCode()
     }
+
 }
+
+class TopicPart(
+    val command:String,
+    val description: String,
+    val example:String
+)

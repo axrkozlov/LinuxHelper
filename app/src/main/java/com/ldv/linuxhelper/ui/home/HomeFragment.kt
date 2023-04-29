@@ -51,7 +51,8 @@ class HomeFragment : Fragment() {
             viewModel.getList().collect {
                 checkList(it)
                 listAdapter.submitList(it)
-                Log.i("TAG", "setupListAdapter: ${it.size}")
+//                Log.i("TAG", "setupListAdapter: ${it.size}")
+//                if (it[0].topicParts.size>0) Log.i("TAG", "setupListAdapter: ${it[0].topicParts[0].command}")
             }
         }
         lifecycle.coroutineScope.launch {

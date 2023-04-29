@@ -50,6 +50,12 @@ class TopicsAdapter(private val viewModel: HomeViewModel) :
 
             binding.title.text=topic.title
             binding.subtitle.text=topic.subtitle
+            var hashtag =StringBuilder()
+            topic.topicParts.forEach {
+                hashtag.append("#${it.command} ")
+            }
+            binding.subtitle.text=hashtag.toString()
+
             binding.root.setOnClickListener {
                 viewModel.openTopic(topic)
             }
