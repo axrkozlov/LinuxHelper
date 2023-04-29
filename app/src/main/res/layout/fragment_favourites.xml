@@ -21,22 +21,31 @@
         android:animateLayoutChanges="true">
 
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:titleTextColor="?attr/colorOnSurface"
-                app:title="Закладки"
-                app:layout_collapseMode="pin"
-                app:contentInsetStartWithNavigation="0dp"
-                 />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:titleTextColor="?attr/colorOnSurface"
+            app:title="Избранное"
+            app:layout_collapseMode="pin"
+            app:contentInsetStartWithNavigation="0dp"
+            />
 
 
     </com.google.android.material.appbar.AppBarLayout>
+<!--    <ScrollView-->
+<!--        android:id="@+id/emptyListLabel"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="visible"-->
+
+<!--        >-->
+
+<!--    </ScrollView>-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topicList"
+        android:id="@+id/tipList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_topic"
@@ -44,5 +53,14 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
+    <TextView
+        android:id="@+id/emptyListText"
+        android:layout_width="match_parent"
+        android:padding="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:text="Здесь будет список избранных комманд"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
